@@ -1,4 +1,6 @@
-////将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+package leetcode.editor.cn;
+import common.*;
+////将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 ////
 //// 
 ////
@@ -51,22 +53,22 @@ class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode result = new ListNode();
         ListNode currentNode = result;
-        while(list1 != null || list2 != null) {
-            if(list1 != null) {
-                if (list2 != null && list2.val < list1.val) {
-                    currentNode.next = list2;
-                    currentNode = list2;
-                    list2 = list2.next;
-                } else {
-                    currentNode.next = list1;
-                    currentNode = list1;
-                    list1 = list1.next;
-                }
-            } else {
+        while(list1 != null && list2 != null) {
+            if (list2.val < list1.val) {
                 currentNode.next = list2;
                 currentNode = list2;
                 list2 = list2.next;
+            } else {
+                currentNode.next = list1;
+                currentNode = list1;
+                list1 = list1.next;
             }
+        }
+        if (list1 != null) {
+            currentNode.next = list1;
+        }
+        if (list2 != null) {
+            currentNode.next = list2;
         }
         return result.next;
     }
